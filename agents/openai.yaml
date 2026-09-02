@@ -1,0 +1,4 @@
+interface:
+  display_name: "Unity Engineering Practices"
+  short_description: "在 Unity 项目中按需应用共享工程规范、决策原则和审查清单"
+  default_prompt: "Use $unity-engineering-practices to apply the relevant shared practices to this Unity task."
