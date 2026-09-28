@@ -42,10 +42,10 @@ description: Apply shared Unity engineering practices when planning, implementin
 - 涉及仓库中的实际修改、重构、缺陷修复或变更审查时，阅读 [项目变更工作流](references/project-change-workflow.md)。
 - 涉及对象创建/销毁频率、复用、预热、容量、状态重置、粒子、投射物、敌人或 UI 复用时，阅读 [对象池规范](references/object-pooling.md)。
 - 涉及 Unity 资源、`.meta`、GUID、导入设置、资源索引或自动生成文件时，阅读 [资源与生成文件规范](references/assets-and-generated-files.md)。
-- 涉及 UI 面板、弹窗、Prefab 层级、组件绑定、布局或交互时，阅读 [UI 与 Prefab 规范](references/ui-and-prefab.md)。
+- 涉及 UI 面板、弹窗、Prefab 层级、组件绑定、布局、交互或效果图复刻时，阅读 [UI 与 Prefab 规范](references/ui-and-prefab.md)，有明确效果图时执行其中的 100% 复刻与适配验收要求。
 - 涉及 Tween、Animator、Animation、Spine、粒子、飞行动效或其他表现流程时，阅读 [动效生命周期规范](references/animation-and-effects.md)。
 - 涉及玩家可见文本、语言 Key、翻译表、占位符、语言切换或 RTL 时，阅读 [本地化规范](references/localization.md)。
-- 涉及在 Unity 项目之间复制、移植或重建功能时，阅读 [跨项目功能迁移规范](references/feature-migration.md)。
+- 涉及在 Unity 项目之间复制、移植或重建功能时，阅读 [跨项目功能迁移规范](references/feature-migration.md)；涉及 UI 视觉时同时按 [UI 与 Prefab 规范](references/ui-and-prefab.md) 验收。
 - 添加、拆分或修订本库规范时，阅读 [规范编写标准](references/practice-authoring.md)。
 
 如果目录中没有覆盖当前主题的规范，使用一般 Unity 工程判断继续工作，并明确说明“共享规范库尚未覆盖该主题”；不要把临时判断伪装成本库规则。
