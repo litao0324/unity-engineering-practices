@@ -7,6 +7,9 @@
 | 项目变更 | [project-change-workflow.md](project-change-workflow.md) | 实际修改、重构、缺陷修复、代码或资源审查、验证和提交前收口 |
 | 对象池 | [object-pooling.md](object-pooling.md) | 判断是否池化；设计、实现或审查对象池；排查复用状态、容量、生命周期和性能问题 |
 | 资源与生成文件 | [assets-and-generated-files.md](assets-and-generated-files.md) | 新增、移动、重命名、删除或迁移 Unity 资源；处理 `.meta`、GUID、资源索引和生成结果 |
+| QAssets 生成 | [qframework-reskit-generation.md](qframework-reskit-generation.md) | 已使用 QFramework ResKit/QAssets 的项目：资源标记、资源名常量生成、常量缺失、动态加载和对象池资源 |
+| 状态持久化 | [statusutil-es3-persistence.md](statusutil-es3-persistence.md) | 已使用 StatusConfig/StatusUtil/ES3 Cache 的项目：默认值、新增字段、生成属性、存档兼容和批量保存 |
+| UIKit 面板创建 | [qframework-uikit-panel-creation.md](qframework-uikit-panel-creation.md) | 已使用 QFramework UIKit 的项目：面板/弹窗命名、设置窗口、创建 Prefab/脚本/Designer、绑定生成与验收 |
 | UI 与 Prefab | [ui-and-prefab.md](ui-and-prefab.md) | 新增或修改面板、弹窗、Prefab 层级、绑定字段、布局、交互和复用组件；效果图 100% 复刻、运行截图对照与适配验收 |
 | 动效生命周期 | [animation-and-effects.md](animation-and-effects.md) | 接入或审查 Tween、Animator、Animation、Spine、粒子、循环特效和飞行动效 |
 | 本地化 | [localization.md](localization.md) | 新增或修改玩家文本、语言 Key、翻译数据、占位符、Fallback、动态刷新和 RTL |

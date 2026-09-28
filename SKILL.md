@@ -1,6 +1,6 @@
 ---
 name: unity-engineering-practices
-description: Apply shared Unity engineering practices when planning, implementing, reviewing, refactoring, debugging, profiling, migrating, or validating Unity projects. Use for Unity 架构设计、功能实现、代码审查、性能优化、问题修复、跨项目迁移，以及对象池、资源与 .meta、生成文件、UI/Prefab、本地化、动效生命周期、内存、渲染和项目结构等决策。 Also use when adding or revising practices in this library. Do not use for non-Unity work.
+description: Apply shared Unity engineering practices when planning, implementing, reviewing, refactoring, debugging, profiling, migrating, or validating Unity projects. Use for Unity 架构设计、功能实现、代码审查、性能优化、问题修复、跨项目迁移，以及对象池、资源与 .meta、生成文件、UI/Prefab、本地化、动效生命周期、内存、渲染和项目结构等决策。 Also covers QFramework ResKit/QAssets 生成、StatusConfig/StatusUtil/ES3 状态持久化、UIKit 面板创建，以及本库规范维护。 Do not use for non-Unity work.
 ---
 
 # Unity Engineering Practices
@@ -42,6 +42,9 @@ description: Apply shared Unity engineering practices when planning, implementin
 - 涉及仓库中的实际修改、重构、缺陷修复或变更审查时，阅读 [项目变更工作流](references/project-change-workflow.md)。
 - 涉及对象创建/销毁频率、复用、预热、容量、状态重置、粒子、投射物、敌人或 UI 复用时，阅读 [对象池规范](references/object-pooling.md)。
 - 涉及 Unity 资源、`.meta`、GUID、导入设置、资源索引或自动生成文件时，阅读 [资源与生成文件规范](references/assets-and-generated-files.md)。
+- 项目使用 QFramework ResKit/QAssets，且涉及资源标记、常量缺失、资源新增/移动/重命名或动态加载时，阅读 [QAssets 生成](references/qframework-reskit-generation.md)。
+- 项目使用 StatusConfig → StatusUtil 生成属性 → ES3 Cache 链路，且涉及新增、修改、审查或使用持久化状态时，阅读 [状态持久化](references/statusutil-es3-persistence.md)。
+- 项目使用 QFramework UIKit，且涉及创建面板、弹窗、Prefab/Designer 配对或创建流程审查时，阅读 [UIKit 面板创建](references/qframework-uikit-panel-creation.md)。
 - 涉及 UI 面板、弹窗、Prefab 层级、组件绑定、布局、交互或效果图复刻时，阅读 [UI 与 Prefab 规范](references/ui-and-prefab.md)，有明确效果图时执行其中的 100% 复刻与适配验收要求。
 - 涉及 Tween、Animator、Animation、Spine、粒子、飞行动效或其他表现流程时，阅读 [动效生命周期规范](references/animation-and-effects.md)。
 - 涉及玩家可见文本、语言 Key、翻译表、占位符、语言切换或 RTL 时，阅读 [本地化规范](references/localization.md)。

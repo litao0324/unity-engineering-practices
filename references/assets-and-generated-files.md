@@ -49,6 +49,24 @@
 - 避免通过隐藏错误节点、替换默认材质或增加 Editor fallback 掩盖缺失引用。
 - 避免提交 `.csproj`、缓存或其他可重新生成文件，除非项目明确要求且差异必要。
 
+## Prefab and Import Checks
+
+以下是资源引用闭合的具体检查方式；普通资源改动不意味着必须手改 YAML：
+
+- 优先在 Unity 中加载 Prefab contents、实例化嵌套对象、设置层级和引用、保存并卸载，再重新导入。
+- 必须手改 YAML 时，核对 `m_SourcePrefab` GUID、唯一的本地 fileID、stripped 对象及组件引用、外层 `m_AddedGameObjects` 登记、`m_Modifications` 的源对象 target；检查 `m_Children` / `m_Father`、`m_GameObject` / `m_Component` 双向闭合，保持 Unity 原有空格缩进。只迁入半棵子树或残缺对象块不能通过检查。
+- 本地 fileID 必须解析到对应对象块或明确的嵌套源对象。Broken PPtr 按缺失 fileID 去重后追源，不因根节点可打开就忽略错误。
+- 修改 GUID 时检查全部反向引用、旧 GUID 残留和新 GUID 冲突，并回归目标项目原有使用者。
+- Sprite 检查导入模式、Pixels Per Unit、Border、裁切、子 Sprite fileID、图集收录与打包依赖；材质检查 Shader、include、依赖 Shader 和贴图，动画检查 Clip/Controller 引用。
+- 绑定检查字段名/类型、脚本 GUID、必填引用，以及 partial 中重复字段/生命周期方法；重新生成后字段不能丢失或重复。
+- 新建或修改后检查最终加载出的节点（包括默认隐藏状态）、继承和覆盖；静态引用检查不替代运行表现验收。
+
+## Validation Cases
+
+- 正向：迁移嵌套 Prefab 子树，核对新增对象登记、源 fileID、绑定和完整依赖，再让 Unity 导入并验证最终实例。
+- 反向：只改业务计算逻辑，没有序列化资源变化，不机械重写 GUID、Prefab 或图集。
+- 边界：源资源含无法解析的引用，先记录缺口并追溯来源，不删除可见节点或套默认材质制造通过。
+
 ## Validation
 
 - [ ] 资源文件与 `.meta` 成对存在，GUID 无冲突。
@@ -66,4 +84,3 @@
 - 哪些文件由 Editor 工具、表格或配置自动生成？
 - 资源 GUID 是否允许跨项目保留？
 - 是否存在必须验证的真机构建、AssetBundle 或 Addressables 模式？
-
