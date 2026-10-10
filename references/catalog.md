@@ -4,7 +4,7 @@
 
 | 主题 | 规范文件 | 适用任务 |
 | --- | --- | --- |
-| 项目变更 | [project-change-workflow.md](project-change-workflow.md) | 实际修改、重构、缺陷修复、代码或资源审查、验证和提交前收口 |
+| 项目变更 | [project-change-workflow.md](project-change-workflow.md) | 实际修改、重构、缺陷修复、代码或资源审查；功能影响确认、主动自测、证据记录、用户验收交付和提交前收口 |
 | 对象池 | [object-pooling.md](object-pooling.md) | 判断是否池化；设计、实现或审查对象池；排查复用状态、容量、生命周期和性能问题 |
 | 资源与生成文件 | [assets-and-generated-files.md](assets-and-generated-files.md) | 新增、移动、重命名、删除或迁移 Unity 资源；处理 `.meta`、GUID、资源索引和生成结果 |
 | QAssets 生成 | [qframework-reskit-generation.md](qframework-reskit-generation.md) | 已使用 QFramework ResKit/QAssets 的项目：资源标记、资源名常量生成、常量缺失、动态加载和对象池资源 |
