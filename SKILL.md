@@ -40,6 +40,9 @@ description: Apply shared Unity engineering practices when planning, implementin
 ## Reference Routing
 
 - 涉及仓库中的实际修改、重构、缺陷修复或变更审查时，阅读 [项目变更工作流](references/project-change-workflow.md)；实际改动按该流程确认功能影响、主动自测并交付实际结果及用户验收入口。
+- 涉及临时测试数据、运行夹具、内置/缓存/远端读取或新局与快照恢复验证时，阅读 [测试数据与运行夹具](references/test-data-and-fixtures.md)。
+- 涉及逻辑与视觉状态分离、异步操作容量、随机外观或稳定身份续关时，阅读 [业务状态与表现隔离](references/state-and-presentation.md)。
+- 涉及含原生库的 SDK 导入、升级、重建、平台导入设置或构建/设备兼容验证时，阅读 [原生插件接入](references/native-plugin-integration.md)。
 - 涉及对象创建/销毁频率、复用、预热、容量、状态重置、粒子、投射物、敌人或 UI 复用时，阅读 [对象池规范](references/object-pooling.md)。
 - 涉及 Unity 资源、`.meta`、GUID、导入设置、资源索引或自动生成文件时，阅读 [资源与生成文件规范](references/assets-and-generated-files.md)。
 - 项目使用 QFramework ResKit/QAssets，且涉及资源标记、常量缺失、资源新增/移动/重命名或动态加载时，阅读 [QAssets 生成](references/qframework-reskit-generation.md)。
