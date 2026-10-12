@@ -45,7 +45,7 @@ description: Apply shared Unity engineering practices when planning, implementin
 - 项目使用 QFramework ResKit/QAssets，且涉及资源标记、常量缺失、资源新增/移动/重命名或动态加载时，阅读 [QAssets 生成](references/qframework-reskit-generation.md)。
 - 项目使用 StatusConfig → StatusUtil 生成属性 → ES3 Cache 链路，且涉及新增、修改、审查或使用持久化状态时，阅读 [状态持久化](references/statusutil-es3-persistence.md)。
 - 项目使用 QFramework UIKit，且涉及创建面板、弹窗、Prefab/Designer 配对或创建流程审查时，阅读 [UIKit 面板创建](references/qframework-uikit-panel-creation.md)。
-- 涉及 UI 面板、弹窗、Prefab 层级、组件绑定、布局、交互或效果图复刻时，阅读 [UI 与 Prefab 规范](references/ui-and-prefab.md)，有明确效果图时执行其中的 100% 复刻与适配验收要求。
+- 涉及 UI 面板、弹窗、Prefab 层级、组件绑定、布局、交互、既有实现替换或效果图复刻时，阅读 [UI 与 Prefab 规范](references/ui-and-prefab.md)；迁入后的外观调整同样检查实现替换依据，有明确效果图时执行其中的 100% 复刻与适配验收要求。
 - 涉及 Tween、Animator、Animation、Spine、粒子、飞行动效或其他表现流程时，阅读 [动效生命周期规范](references/animation-and-effects.md)。
 - 涉及玩家可见文本、语言 Key、翻译表、占位符、语言切换或 RTL 时，阅读 [本地化规范](references/localization.md)。
 - 涉及在 Unity 项目之间复制、移植或重建功能时，阅读 [跨项目功能迁移规范](references/feature-migration.md)；涉及 UI 视觉时同时按 [UI 与 Prefab 规范](references/ui-and-prefab.md) 验收。
