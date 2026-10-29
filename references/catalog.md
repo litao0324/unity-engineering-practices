@@ -4,6 +4,7 @@
 
 | 主题 | 规范文件 | 适用任务 |
 | --- | --- | --- |
+| 埋点与分析数据 | [analytics-and-telemetry.md](analytics-and-telemetry.md) | 业务分析事件、参数、公共属性、用户属性；触发时机、累计与重置、归因、防重复、兼容及分层上报验证 |
 | 项目变更 | [project-change-workflow.md](project-change-workflow.md) | 实际修改、重构、缺陷修复、代码或资源审查；功能影响确认、主动自测、证据记录、用户验收交付、提交前收口和 Git 提交信息 |
 | 测试数据与夹具 | [test-data-and-fixtures.md](test-data-and-fixtures.md) | 临时测试数据、隔离实例、真实读取来源、新局/快照路径及测试后恢复 |
 | 状态与表现隔离 | [state-and-presentation.md](state-and-presentation.md) | 逻辑/视觉集合、异步交互容量、随机外观、稳定身份及刷新/撤销/续关一致性 |

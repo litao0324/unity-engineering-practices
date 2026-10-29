@@ -1,6 +1,6 @@
 ---
 name: unity-engineering-practices
-description: Apply shared Unity engineering practices when planning, implementing, reviewing, refactoring, debugging, profiling, migrating, or validating Unity projects. Use for Unity 架构设计、功能实现、代码审查、性能优化、问题修复、跨项目迁移，以及对象池、资源与 .meta、生成文件、UI/Prefab、本地化、动效生命周期、内存、渲染和项目结构等决策。 Also covers QFramework ResKit/QAssets 生成、StatusConfig/StatusUtil/ES3 状态持久化、UIKit 面板创建，以及本库规范维护。 Do not use for non-Unity work.
+description: Apply shared Unity engineering practices when planning, implementing, reviewing, refactoring, debugging, profiling, migrating, or validating Unity projects. Use for Unity 架构设计、功能实现、代码审查、性能优化、问题修复、跨项目迁移，以及对象池、资源与 .meta、生成文件、UI/Prefab、本地化、动效生命周期、埋点、用户属性、公共属性、内存、渲染和项目结构等决策。 Also covers QFramework ResKit/QAssets 生成、StatusConfig/StatusUtil/ES3 状态持久化、UIKit 面板创建，以及本库规范维护。 Do not use for non-Unity work.
 ---
 
 # Unity Engineering Practices
@@ -39,6 +39,7 @@ description: Apply shared Unity engineering practices when planning, implementin
 
 ## Reference Routing
 
+- 涉及业务分析事件、参数、公共属性、用户属性、累计口径、归因或上报验证时，阅读 [埋点与分析数据规范](references/analytics-and-telemetry.md)。
 - 涉及仓库中的实际修改、重构、缺陷修复、变更审查或编写 Git 提交信息时，阅读 [项目变更工作流](references/project-change-workflow.md)；实际改动按该流程确认功能影响、主动自测并交付实际结果及用户验收入口。
 - 涉及临时测试数据、运行夹具、内置/缓存/远端读取或新局与快照恢复验证时，阅读 [测试数据与运行夹具](references/test-data-and-fixtures.md)。
 - 涉及逻辑与视觉状态分离、异步操作容量、随机外观或稳定身份续关时，阅读 [业务状态与表现隔离](references/state-and-presentation.md)。
