@@ -4,27 +4,34 @@ on:
   push:
     tags:
       - 'v[0-9]*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 已存在的正式版本标签，例如 v1.0.0
+        required: true
+        type: string
 
 permissions:
   contents: write
 
 concurrency:
-  group: release-${{ github.ref }}
+  group: release-${{ inputs.tag || github.ref_name }}
   cancel-in-progress: false
 
 jobs:
   release:
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    env:
+      RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
     steps:
       - name: 检出标签对应的内容
         uses: actions/checkout@v4
         with:
+          ref: refs/tags/${{ inputs.tag || github.ref_name }}
           persist-credentials: false
 
       - name: 校验版本并提取发布说明
-        env:
-          RELEASE_TAG: ${{ github.ref_name }}
         run: |
           python3 - <<'PY'
           import datetime
@@ -60,9 +67,23 @@ jobs:
       - name: 创建 GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
-          RELEASE_TAG: ${{ github.ref_name }}
         run: |
-          gh release create "$RELEASE_TAG" \
-            --verify-tag \
-            --title "$RELEASE_TAG" \
-            --notes-file "$RUNNER_TEMP/release-notes.md"
+          if gh release view "$RELEASE_TAG" --json body,isDraft > "$RUNNER_TEMP/existing-release.json"; then
+            python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          folder = Path(os.environ['RUNNER_TEMP'])
+          release = json.loads((folder / 'existing-release.json').read_text(encoding='utf-8'))
+          expected = (folder / 'release-notes.md').read_text(encoding='utf-8').strip()
+          if release['isDraft'] or release['body'].strip() != expected:
+              raise SystemExit('已有 Release 未正式发布或说明不一致，停止操作以保护已发布内容')
+          print('对应版本已发布且说明一致，无需重复创建')
+          PY
+          else
+            gh release create "$RELEASE_TAG" \
+              --verify-tag \
+              --title "$RELEASE_TAG" \
+              --notes-file "$RUNNER_TEMP/release-notes.md"
+          fi
