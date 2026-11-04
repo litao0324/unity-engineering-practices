@@ -1,0 +1,68 @@
+name: 发布正式版本
+
+on:
+  push:
+    tags:
+      - 'v[0-9]*'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: 检出标签对应的内容
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: 校验版本并提取发布说明
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          python3 - <<'PY'
+          import datetime
+          import os
+          from pathlib import Path
+          import re
+
+          tag = os.environ['RELEASE_TAG']
+          if not re.fullmatch(r'v(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)', tag):
+              raise SystemExit('标签必须为正式版本号，例如 v1.0.0')
+
+          text = Path('CHANGELOG.md').read_text(encoding='utf-8')
+          sections = list(re.finditer(r'^## (.+)$', text, re.MULTILINE))
+          matches = [i for i, section in enumerate(sections)
+                     if section.group(1).startswith(f'[{tag[1:]}]')]
+          if len(matches) != 1:
+              raise SystemExit('发布说明必须包含且仅包含一个对应版本条目')
+
+          index = matches[0]
+          heading = sections[index]
+          date = re.fullmatch(r'\[' + re.escape(tag[1:]) + r'\] - (\d{4}-\d{2}-\d{2})', heading.group(1))
+          if date is None:
+              raise SystemExit('版本标题必须为 ## [版本号] - YYYY-MM-DD')
+          datetime.date.fromisoformat(date.group(1))
+          end = sections[index + 1].start() if index + 1 < len(sections) else len(text)
+          notes = text[heading.end():end].strip()
+          if not notes:
+              raise SystemExit('对应版本的发布说明不能为空')
+          Path(os.environ['RUNNER_TEMP'], 'release-notes.md').write_text(notes + '\n', encoding='utf-8')
+          print(f'已校验 {tag} 的发布说明')
+          PY
+
+      - name: 创建 GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          gh release create "$RELEASE_TAG" \
+            --verify-tag \
+            --title "$RELEASE_TAG" \
+            --notes-file "$RUNNER_TEMP/release-notes.md"
