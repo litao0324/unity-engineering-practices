@@ -1,6 +1,6 @@
 ---
 name: unity-engineering-practices
-description: Apply shared Unity engineering practices when planning, implementing, reviewing, refactoring, debugging, profiling, migrating, or validating Unity projects. Use for Unity 架构设计、功能实现、代码审查、性能优化、问题修复、跨项目迁移，以及对象池、资源与 .meta、生成文件、UI/Prefab、本地化、动效生命周期、埋点、用户属性、公共属性、内存、渲染和项目结构等决策。 Also covers QFramework ResKit/QAssets 生成、StatusConfig/StatusUtil/ES3 状态持久化、UIKit 面板创建，以及本库规范维护。 Do not use for non-Unity work.
+description: Apply shared Unity engineering practices when planning, implementing, reviewing, refactoring, debugging, profiling, migrating, or validating Unity projects. Use for Unity 架构设计、功能实现、代码审查、SOLID、命名与注释、热路径与 GC、性能优化、问题修复、跨项目迁移，以及对象池、资源与 .meta、生成文件、UI/Prefab、本地化、动效生命周期、埋点、用户属性、公共属性、内存、渲染和项目结构等决策。 Also covers QFramework ResKit/QAssets 生成、StatusConfig/StatusUtil/ES3 状态持久化、UIKit 面板创建，以及本库规范维护。 Do not use for non-Unity work.
 ---
 
 # Unity Engineering Practices
@@ -15,7 +15,7 @@ description: Apply shared Unity engineering practices when planning, implementin
 2. 仅在任务需要时检查 Unity 版本、目标平台、渲染管线、包依赖和现有架构。
 3. 阅读 [规范目录](references/catalog.md)，选择与当前任务直接相关的规范。
 4. 阅读对应规范全文；不要仅根据标题或常识推断其中要求。
-5. 区分 `MUST`、`SHOULD`、`CONSIDER` 和 `AVOID`，结合项目证据应用规则。
+5. 区分 `MUST`、`SHOULD`、`CONSIDER` 和 `AVOID`，结合项目证据应用规则；所有问题排查先执行 [通用缺陷定位流程](references/project-change-workflow.md#缺陷定位与共享层改动)，确认现象、最早偏差和原因证据，再选择修复层级。
 6. 修改或审查完成后，执行对应规范中的检查清单。
 7. 简要报告适用的关键规则、验证结果，以及所有有意偏离和残余风险。
 
@@ -39,6 +39,8 @@ description: Apply shared Unity engineering practices when planning, implementin
 
 ## Reference Routing
 
+- 涉及第一方 C# 代码的新增、重构、修复、审查或职责、接口、命名、注释设计时，阅读 [基础编码与设计](references/coding-and-design.md)。
+- 涉及运行时 C# 实现或审查、热路径、缓存、GC、日志、事件、异步/协程、运行时 Mesh/Material 所有权时，阅读 [运行时性能与生命周期](references/runtime-performance-and-lifetime.md)；高频限制按实际调用链判断，不套用于所有初始化和离线工具。
 - 涉及业务分析事件、参数、公共属性、用户属性、累计口径、归因或上报验证时，阅读 [埋点与分析数据规范](references/analytics-and-telemetry.md)。
 - 涉及仓库中的实际修改、重构、缺陷修复、变更审查或编写 Git 提交信息时，阅读 [项目变更工作流](references/project-change-workflow.md)；实际改动按该流程确认功能影响、主动自测并交付实际结果及用户验收入口。
 - 涉及多个对话或 Worktree 共用 Unity Editor、验证排队、并发写入或测试状态冲突时，阅读 [多对话协作与 Editor 独占](references/unity-validation-coordination.md)；按真实工程路径协调占用，工具位于 `scripts/unity_validation.py`。
@@ -51,7 +53,7 @@ description: Apply shared Unity engineering practices when planning, implementin
 - 项目使用 StatusConfig → StatusUtil 生成属性 → ES3 Cache 链路，且涉及新增、修改、审查或使用持久化状态时，阅读 [状态持久化](references/statusutil-es3-persistence.md)。
 - 项目使用 QFramework UIKit，且涉及创建面板、弹窗、Prefab/Designer 配对或创建流程审查时，阅读 [UIKit 面板创建](references/qframework-uikit-panel-creation.md)。
 - 涉及 UI 面板、弹窗、Prefab 层级、组件绑定、布局、交互、既有实现替换或效果图复刻时，阅读 [UI 与 Prefab 规范](references/ui-and-prefab.md)；迁入后的外观调整同样检查实现替换依据，有明确效果图时执行其中的 100% 复刻与适配验收要求。
-- 涉及 Tween、Animator、Animation、Spine、粒子、飞行动效或其他表现流程时，阅读 [动效生命周期规范](references/animation-and-effects.md)。
+- 涉及 Tween、Animator、Animation、Spine、粒子、飞行动效或其他表现流程时，阅读 [动效生命周期规范](references/animation-and-effects.md)；空引用、失效目标和提前销毁先按其中排查顺序定位，拟改公共弹窗或资源生命周期时同时执行 [共享层改动检查](references/project-change-workflow.md#缺陷定位与共享层改动)。
 - 涉及玩家可见文本、语言 Key、翻译表、占位符、语言切换或 RTL 时，阅读 [本地化规范](references/localization.md)。
 - 涉及在 Unity 项目之间复制、移植或重建功能时，阅读 [跨项目功能迁移规范](references/feature-migration.md)；涉及 UI 视觉时同时按 [UI 与 Prefab 规范](references/ui-and-prefab.md) 验收。
 - 添加、拆分或修订本库规范时，阅读 [规范编写标准](references/practice-authoring.md)。

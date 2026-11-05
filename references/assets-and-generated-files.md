@@ -4,6 +4,8 @@
 
 保持 Unity 资源身份、序列化引用、导入设置和生成链路一致，避免出现 Missing Reference、错误资源、白图、粉色材质、重复定义或仅在 Editor 中可用的问题。
 
+代码字段命名与序列化兼容见 [基础编码与设计](coding-and-design.md)；运行时创建 Mesh、Material 及资源实例的所有权和释放见 [运行时性能与生命周期](runtime-performance-and-lifetime.md)。本规范负责资源身份、引用和生成链路，不替代运行时生命周期检查。
+
 ## Applies When
 
 - 新增、复制、移动、重命名、删除或跨项目迁移 Unity 资源。
